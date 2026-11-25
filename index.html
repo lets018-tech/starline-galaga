@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#080d1b" />
+  <title>GALAGA · 별빛 전선</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
+:root{font-family:'Noto Sans KR',sans-serif;color:#eff3ff;background:#080d1b;font-synthesis:none;text-rendering:optimizeLegibility;--muted:#747f9e;--cyan:#75e6f4;--pink:#ff72b6;--line:#202b48}*{box-sizing:border-box}body{margin:0;min-width:320px;min-height:100vh;background:radial-gradient(ellipse at 50% 43%,#182349 0,#10172d 29%,#080d1b 72%);overflow-x:hidden}.arcade{max-width:1200px;min-height:100vh;margin:auto;padding:24px 48px 18px;display:flex;flex-direction:column}.topbar{height:42px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #26304b;padding-bottom:15px}.brand{display:flex;align-items:center;gap:8px;color:#f7f4ff;text-decoration:none;font:500 12px 'DM Mono',monospace;letter-spacing:2px}.brand-mark{font-size:20px;color:#f5cb76}.brand-light{color:#92a0c4}.top-center,.sound-button,.micro-label,.field-label,.cabinet-code,.cabinet-bottom,.overlay-kicker,.overlay-hint,.weapon-caption,.footer{font-family:'DM Mono',monospace;letter-spacing:1px}.top-center{color:#7c88aa;font-size:9px;display:flex;align-items:center;gap:8px}.live-dot{width:6px;height:6px;border-radius:50%;background:#68f1c1;box-shadow:0 0 10px #68f1c1;animation:blink 1.5s infinite}.sound-button{display:flex;gap:8px;align-items:center;border:1px solid #2c3858;background:#121a30;color:#aab6d7;padding:8px 11px;border-radius:7px;font-size:9px;cursor:pointer}.sound-button[aria-pressed=true]{color:#f2ce7d;border-color:#8e7247}.game-layout{flex:1;display:grid;grid-template-columns:minmax(130px,1fr) minmax(330px,480px) minmax(130px,1fr);gap:32px;align-items:center;justify-content:center;padding:24px 0}.side-info{align-self:center;min-height:390px}.micro-label{color:#6c7a9e;font-size:9px;border-bottom:1px solid #25304b;padding-bottom:13px;margin-bottom:18px}.field-label{display:block;color:#687696;font-size:9px;letter-spacing:1.8px}.score-block,.record-block{display:grid;gap:7px;margin:18px 0}.score-block strong{font:500 25px 'DM Mono',monospace;color:#8cebf4;letter-spacing:2px}.record-block strong{font:500 16px 'DM Mono',monospace;color:#c8d1e9;letter-spacing:1px}.lives{display:flex;gap:8px;margin-top:28px;color:#ff72a9;font-size:18px;text-shadow:0 0 13px #ff5d9580}.lives-caption{font-size:9px;color:#6e7a97;margin-top:7px}.side-tip{display:flex;gap:10px;margin-top:51px;padding-top:15px;border-top:1px solid #202b45}.tip-star{color:#f4cf81;font-size:18px}.side-tip p{margin:0;color:#8e9bb9;font-size:10px;line-height:1.8}.cabinet{width:100%;padding:12px;border:1px solid #465477;border-radius:13px;background:linear-gradient(135deg,#333f63,#202a47 30%,#151d35 74%,#354260);box-shadow:0 24px 80px #0008,0 0 45px #6a7cd316,inset 0 1px #a2b0d133}.cabinet-top,.cabinet-bottom{display:flex;align-items:center;justify-content:space-between;height:28px;color:#bcc7e4}.cabinet-name{font-family:'Black Han Sans',sans-serif;color:#efca7f;font-size:12px;letter-spacing:1px}.cabinet-code{font-size:7px;color:#8090b2}.game-frame{position:relative;width:100%;aspect-ratio:480/680;overflow:hidden;border:1px solid #111831;border-radius:5px;background:#070b17;box-shadow:inset 0 0 40px #050713}.game-frame:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,#02061507 0 2px,#00000013 3px 4px);mix-blend-mode:screen;z-index:2}canvas{display:block;width:100%;height:100%}.screen-overlay{position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;background:linear-gradient(#071026b9,#0a1025e8 75%);transition:opacity .25s}.screen-overlay.hidden{opacity:0;pointer-events:none}.overlay-stars{color:#edca7f;font-size:14px;letter-spacing:3px;margin-bottom:15px}.overlay-kicker{font-size:8px;color:#91a1c8;letter-spacing:2px}.screen-overlay h1{font:400 clamp(46px,6vw,72px)/.97 'Black Han Sans',sans-serif;letter-spacing:5px;color:#fff5d9;text-shadow:0 0 28px #fbcc743c;margin:14px 0}.screen-overlay h1 span{color:#8beaf1}.screen-overlay p{font-size:12px;line-height:1.8;color:#b3c0dc;margin:4px 0 24px}.start-button{border:1px solid #d6b86c;border-radius:6px;background:linear-gradient(120deg,#f2d88e,#dcae59);box-shadow:0 4px 24px #efca7340;color:#241d21;padding:12px 30px;font-weight:800;font-size:12px;cursor:pointer;letter-spacing:.5px}.start-button span:first-child{margin-right:8px}.overlay-hint{font-size:8px;color:#8794b0;margin-top:20px}.overlay-hint kbd{font:9px 'DM Mono',monospace;padding:3px 5px;border:1px solid #5c6885;border-radius:3px;color:#d8e2fa}.cabinet-bottom{font-size:7px;color:#8291b2}.cabinet-lights{display:flex;gap:5px}.cabinet-lights i{width:5px;height:5px;border-radius:50%;background:#75e6f4;box-shadow:0 0 6px currentColor}.cabinet-lights i:nth-child(2){background:#ff72b6}.cabinet-lights i:nth-child(3){background:#f5cb76}.stage-card,.weapon-card{padding:15px 13px;border:1px solid #293552;border-radius:8px;background:#10182b;margin-bottom:16px}.stage-card>strong{display:block;font:500 28px 'DM Mono',monospace;color:#f0d28b;margin:8px 0 11px}.stage-card>strong small{font-size:12px;color:#7b87a5}.stage-track{height:3px;border-radius:4px;background:#26324d;overflow:hidden}.stage-track i{display:block;width:0;height:100%;background:#76e7f1;box-shadow:0 0 8px #76e7f1;transition:width .3s}.stage-name{display:block;color:#a9b5d0;font-size:10px;margin-top:10px}.weapon-visual{height:42px;position:relative;margin:9px 0 3px}.weapon-visual:before{content:"";position:absolute;width:7px;height:31px;border-radius:6px;background:#78eafa;left:calc(50% - 4px);bottom:4px;box-shadow:0 0 14px #64eafa}.weapon-visual i:before,.weapon-visual i:after{content:"";position:absolute;width:6px;height:22px;border-radius:6px;background:#ff9bc9;left:calc(50% - 18px);bottom:5px;opacity:0;box-shadow:0 0 10px #ff72b6}.weapon-visual i:after{left:calc(50% + 12px)}.weapon-visual.double i:before,.weapon-visual.double i:after{opacity:1}.weapon-visual.triple i:before{opacity:1;left:calc(50% - 20px)}.weapon-visual.triple i:after{opacity:1;left:calc(50% + 14px)}.weapon-card>strong{font:500 8px 'DM Mono',monospace;color:#e2cf9d;letter-spacing:1px}.weapon-caption{display:block;color:#7786a6;font-size:8px;margin-top:6px}.control-note{margin-top:27px}.control-note p{font-size:10px;color:#98a5c2;line-height:1.55;margin:9px 0}.control-note p:last-child{margin-top:16px;color:#6d7a99;font-size:9px}.stage-toast{position:absolute;z-index:2;left:50%;top:14%;transform:translate(-50%,-5px);opacity:0;color:#f4db98;border:1px solid #e8cc7b80;background:#10182ccc;padding:7px 15px;border-radius:4px;font:10px 'DM Mono',monospace;letter-spacing:2px;transition:opacity .25s,transform .25s;pointer-events:none}.stage-toast.show{opacity:1;transform:translate(-50%,0)}.toast-message{position:absolute;z-index:3;left:50%;top:50%;transform:translate(-50%,-50%);white-space:nowrap;color:#9cf4ec;font:12px 'DM Mono',monospace;text-shadow:0 0 14px #6cf2ef;opacity:0;transition:opacity .2s;pointer-events:none}.toast-message.show{opacity:1}.touch-controls{display:flex;justify-content:center;align-items:center;gap:35px;margin:0 auto 18px}.touch-controls button{touch-action:none;user-select:none;-webkit-user-select:none;cursor:pointer}.move-control{width:65px;height:58px;border:1px solid #344261;border-radius:13px;color:#d2dcf3;background:linear-gradient(145deg,#1e2946,#121a2e);font-size:19px;box-shadow:0 5px 0 #090e1c,0 10px 24px #0005}.move-control:active,.move-control.pressed{transform:translateY(3px);box-shadow:0 2px 0 #090e1c;color:#8cebf4}.fire-control{width:78px;height:70px;border:1px solid #e1bd72;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1px;color:#2b2330;background:radial-gradient(circle at 35% 25%,#ffe8a3,#e6bb68 70%);box-shadow:0 5px 0 #907140,0 0 25px #e5bb6340}.fire-control span{font-size:20px}.fire-control small{font:9px 'DM Mono',monospace;font-weight:500;letter-spacing:1px}.fire-control:active,.fire-control.pressed{transform:translateY(4px);box-shadow:0 1px 0 #907140,0 0 28px #e5bb6380}.footer{display:flex;justify-content:space-between;border-top:1px solid #202b45;padding-top:13px;color:#677596;font-size:8px}.footer b{color:#e6c377;margin:0 5px}@keyframes blink{50%{opacity:.3}}@media(max-width:760px){.arcade{padding:16px 16px 12px}.topbar{height:37px;padding-bottom:11px}.top-center{display:none}.game-layout{grid-template-columns:minmax(0,480px);gap:0;padding:17px 0 11px}.side-info{display:none}.cabinet{width:min(100%,440px);margin:auto}.touch-controls{gap:42px;margin-bottom:15px}.move-control{width:70px;height:61px}.fire-control{width:78px;height:70px}.footer{font-size:7px}.screen-overlay h1{font-size:56px}}@media(min-width:761px) and (max-height:850px){.arcade{padding-top:15px;padding-bottom:10px}.game-layout{padding:12px 0;gap:22px}.cabinet{max-width:415px}.side-info{min-height:350px}.side-tip{margin-top:30px}.touch-controls{margin-bottom:12px}.footer{padding-top:9px}}@media(max-width:380px){.arcade{padding-right:11px;padding-left:11px}.touch-controls{gap:30px}.footer span:first-child{display:none}.footer{justify-content:center}}
+
+</style>
+  
+</head>
+<body>
+  <main class="arcade">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="별빛 전선"><span class="brand-mark">✦</span><span>STAR<span class="brand-light">LINE</span></span></a>
+      <div class="top-center"><span class="live-dot"></span> GALAXY DEFENSE SYSTEM</div>
+      <button class="sound-button" id="sound-toggle" type="button" aria-pressed="false"><span id="sound-icon">♫</span><span id="sound-label">사운드 켜기</span></button>
+    </header>
+    <section class="game-layout">
+      <aside class="side-info left-info">
+        <div class="micro-label">PLAYER 01</div>
+        <div class="score-block"><span class="field-label">SCORE</span><strong id="score">000000</strong></div>
+        <div class="record-block"><span class="field-label">BEST</span><strong id="best-score">000000</strong></div>
+        <div class="lives" id="lives"><span>♥</span><span>♥</span><span>♥</span></div>
+        <div class="lives-caption">기체 잔여 수</div>
+        <div class="side-tip"><span class="tip-star">✧</span><p>적 폭탄을 맞히면<br />더 강한 연사 무기를<br />획득할 수 있어요.</p></div>
+      </aside>
+
+      <section class="cabinet" aria-label="갤러그 게임">
+        <div class="cabinet-top"><span class="cabinet-name">✦ 별빛 전선 ✦</span><span class="cabinet-code">Nº 1981 · ARCADE</span></div>
+        <div class="game-frame">
+          <canvas id="game" width="480" height="680" aria-label="갤러그 슈팅 게임 화면"></canvas>
+          <div class="screen-overlay" id="overlay">
+            <div class="overlay-stars">✦　·　✧　·　✦</div>
+            <div class="overlay-kicker" id="overlay-kicker">RETRO ARCADE · 5 STAGES</div>
+            <h1 id="overlay-title">별빛<br /><span>전선</span></h1>
+            <p id="overlay-copy">아군 편대를 지키고<br />우주 곤충 함대를 격파하라!</p>
+            <button class="start-button" id="start-button" type="button"><span>▶</span> <span id="start-label">게임 시작</span></button>
+            <div class="overlay-hint">이동 <kbd>←</kbd><kbd>→</kbd>　발사 <kbd>SPACE</kbd></div>
+          </div>
+          <div class="stage-toast" id="stage-toast">STAGE 1</div>
+          <div class="toast-message" id="toast-message"></div>
+        </div>
+        <div class="cabinet-bottom"><span>INSERT STAR · SAVE THE GALAXY</span><span class="cabinet-lights"><i></i><i></i><i></i></span></div>
+      </section>
+
+      <aside class="side-info right-info">
+        <div class="micro-label">MISSION DATA</div>
+        <div class="stage-card"><span class="field-label">STAGE</span><strong><span id="stage">01</span><small> / 05</small></strong><div class="stage-track"><i id="stage-progress"></i></div><span class="stage-name" id="stage-name">푸른 성운</span></div>
+        <div class="weapon-card"><span class="field-label">WEAPON</span><div class="weapon-visual" id="weapon-visual"><i></i></div><strong id="weapon-name">SINGLE SHOT</strong><span class="weapon-caption" id="weapon-caption">기본 펄스 빔</span></div>
+        <div class="control-note"><span class="field-label">CONTROL</span><p>← → 이동</p><p>SPACE 발사</p><p>터치 버튼으로도<br />플레이할 수 있어요</p></div>
+      </aside>
+    </section>
+    <section class="touch-controls" aria-label="게임 조작 버튼">
+      <button class="move-control" id="move-left" type="button" aria-label="왼쪽 이동">◀</button>
+      <button class="fire-control" id="fire" type="button" aria-label="발사"><span>✦</span><small>FIRE</small></button>
+      <button class="move-control" id="move-right" type="button" aria-label="오른쪽 이동">▶</button>
+    </section>
+    <footer class="footer"><span>1981년의 추억, 지금 다시 발사!</span><span>별빛 전선 <b>·</b> ALL SYSTEMS READY</span></footer>
+  </main>
+<script>
+(() => {
+  const canvas = document.getElementById('game');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const $ = id => document.getElementById(id);
+  const stageNames = ['푸른 성운', '유성의 바다', '붉은 행성', '수정 은하', '최후의 함대'];
+  const keys = { left: false, right: false, fire: false };
+  const stars = Array.from({ length: 100 }, () => ({ x: Math.random()*W, y: Math.random()*H, r: Math.random()*1.35+.25, speed: 9+Math.random()*25, a: .2+Math.random()*.7, hue: Math.random() > .86 ? 190 : 0 }));
+  let player = null, shots = [], enemies = [], bombs = [], drops = [], particles = [], stage = 1, score = 0, lives = 3, running = false, gameOver = false;
+  let last = 0, shotTimer = 0, enemyTimer = 1.5, stageStarted = 0, audio = null, musicTimer = null, musicStep = 0, soundOn = false, best = Number(localStorage.getItem('starline-best') || 0);
+  $('best-score').textContent = String(best).padStart(6, '0');
+  const clamp = (x,a,b) => Math.max(a, Math.min(b,x));
+  function setScore(n) { score = n; $('score').textContent = String(score).padStart(6,'0'); if (score > best) { best=score; localStorage.setItem('starline-best', best); $('best-score').textContent=String(best).padStart(6,'0'); } }
+  function uiStage() { $('stage').textContent=String(stage).padStart(2,'0'); $('stage-name').textContent=stageNames[stage-1]; $('stage-progress').style.width=`${(stage-1)*25}%`; }
+  function sound(freq, duration=.09, type='square', volume=.035, slide=0) {
+    if (!soundOn || !audio) return;
+    const o=audio.createOscillator(), g=audio.createGain(); o.type=type; o.frequency.setValueAtTime(freq,audio.currentTime); if(slide) o.frequency.exponentialRampToValueAtTime(Math.max(30,freq+slide),audio.currentTime+duration); g.gain.setValueAtTime(volume,audio.currentTime); g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+duration); o.connect(g).connect(audio.destination); o.start(); o.stop(audio.currentTime+duration);
+  }
+  function startMusic() {
+    if (!soundOn || musicTimer) return;
+    const notes=[392,494,587,494,440,523,659,523,349,440,523,440,392,494,587,698];
+    musicTimer=setInterval(()=>{ if(!running||!soundOn)return; const note=notes[musicStep++%notes.length]; sound(note,.16,'triangle',.013); if(musicStep%4===0)sound(note/2,.25,'sine',.012); },220);
+  }
+  function toggleSound() {
+    soundOn=!soundOn;
+    if(soundOn){audio ||= new (window.AudioContext||window.webkitAudioContext)(); audio.resume(); startMusic(); sound(660,.12,'triangle');}
+    else {clearInterval(musicTimer); musicTimer=null;}
+    $('sound-toggle').setAttribute('aria-pressed',String(soundOn)); $('sound-label').textContent=soundOn?'사운드 켜짐':'사운드 켜기'; $('sound-icon').textContent=soundOn?'♫':'♪';
+  }
+  $('sound-toggle').addEventListener('click',toggleSound);
+  function newGame() { stage=1; lives=3; setScore(0); player={x:W/2,y:H-62,weapon:1,invuln:0}; shots=[]; enemies=[]; bombs=[]; drops=[]; particles=[]; gameOver=false; running=true; last=performance.now(); $('overlay').classList.add('hidden'); $('lives').innerHTML='<span>♥</span><span>♥</span><span>♥</span>'; uiStage(); makeWave(); showStage(); startMusic(); requestAnimationFrame(loop); }
+  function makeWave() { enemies=[]; const rows=3+Math.min(2,Math.floor((stage-1)/2)), cols=5+Math.min(2,Math.floor((stage-1)/2)); for(let r=0;r<rows;r++)for(let c=0;c<cols;c++)enemies.push({x:54+c*(W-108)/(cols-1), y:76+r*43, homeX:54+c*(W-108)/(cols-1), homeY:76+r*43, phase:Math.random()*6.28, row:r, hp:1+(stage>=4&&r===0?1:0), alive:true}); enemyTimer=1.5; }
+  function showStage() { const t=$('stage-toast'); t.textContent=`STAGE ${stage} · ${stageNames[stage-1]}`; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1450); }
+  let toastTimeout; function toast(text){const el=$('toast-message');el.textContent=text;el.classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>el.classList.remove('show'),1250);}
+  $('start-button').addEventListener('click',newGame);
+  function bindHold(el,key){el.addEventListener('pointerdown',e=>{e.preventDefault();keys[key]=true;el.classList.add('pressed');el.setPointerCapture(e.pointerId);if(key==='fire'&&!running&& !gameOver)newGame();});const off=e=>{keys[key]=false;el.classList.remove('pressed')};el.addEventListener('pointerup',off);el.addEventListener('pointercancel',off);el.addEventListener('lostpointercapture',off);}
+  bindHold($('move-left'),'left');bindHold($('move-right'),'right');bindHold($('fire'),'fire');
+  window.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();if(e.code==='ArrowLeft'||e.code==='KeyA')keys.left=true;if(e.code==='ArrowRight'||e.code==='KeyD')keys.right=true;if(e.code==='Space'){keys.fire=true;if(!running&&!gameOver)newGame();}if((e.code==='Enter'||e.code==='Space')&&gameOver)newGame();});
+  window.addEventListener('keyup',e=>{if(e.code==='ArrowLeft'||e.code==='KeyA')keys.left=false;if(e.code==='ArrowRight'||e.code==='KeyD')keys.right=false;if(e.code==='Space')keys.fire=false;});
+  window.addEventListener('blur',()=>{keys.left=keys.right=keys.fire=false;});
+  function burst(x,y,color,count=8){for(let i=0;i<count;i++){const a=Math.random()*Math.PI*2,s=25+Math.random()*115;particles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:.3+Math.random()*.45,max:.7,color,r:1+Math.random()*2});}}
+  function fireShot(){const offsets=player.weapon===1?[0]:player.weapon===2?[-12,12]:[-18,0,18];for(const dx of offsets)shots.push({x:player.x+dx,y:player.y-20,vy:-400});sound(520,.06,'square',.014,260);}
+  function update(dt,now){
+    for(const s of stars){s.y+=s.speed*dt;if(s.y>H){s.y=-2;s.x=Math.random()*W;}}
+    if(!running)return;
+    player.invuln=Math.max(0,player.invuln-dt);player.x=clamp(player.x+((keys.right?1:0)-(keys.left?1:0))*210*dt,23,W-23);
+    shotTimer-=dt;if(keys.fire&&shotTimer<=0){fireShot();shotTimer=player.weapon===1?.34:.4;}
+    const direction=Math.sin(now*.00048)*1;
+    for(const e of enemies)if(e.alive){e.x=e.homeX+direction*(22+stage*2)+Math.sin(now*.0012+e.phase)*4;e.y=e.homeY+Math.sin(now*.0014+e.phase)*3;}
+    enemyTimer-=dt;if(enemyTimer<=0&&enemies.some(e=>e.alive)){const shooters=enemies.filter(e=>e.alive);const e=shooters[Math.floor(Math.random()*shooters.length)];bombs.push({x:e.x,y:e.y+10,vy:90+stage*10,phase:Math.random()*5.5});enemyTimer=Math.max(.7,1.85-stage*.16);}
+    for(const s of shots)s.y+=s.vy*dt;shots=shots.filter(s=>s.y>-10);
+    for(const b of bombs){b.y+=b.vy*dt;b.x+=Math.sin(now*.002+b.phase)*22*dt;}bombs=bombs.filter(b=>b.y<H+15);
+    for(let si=shots.length-1;si>=0;si--){const s=shots[si];let hit=false;
+      for(let bi=bombs.length-1;bi>=0;bi--){const b=bombs[bi];if(Math.abs(s.x-b.x)<12&&Math.abs(s.y-b.y)<13){shots.splice(si,1);bombs.splice(bi,1);const type=Math.random()<.58?2:3;drops.push({x:b.x,y:b.y,vy:64,type,phase:Math.random()*6});burst(b.x,b.y,'#ffe388',9);sound(780,.13,'triangle',.04,520);hit=true;break;}}
+      if(hit)continue;
+      for(const e of enemies){if(e.alive&&Math.abs(s.x-e.x)<16&&Math.abs(s.y-e.y)<14){shots.splice(si,1);e.hp--;if(e.hp<=0){e.alive=false;setScore(score+100);burst(e.x,e.y,['#72e8f2','#ff84c3','#eccb70'][e.row%3],11);sound(250,.1,'square',.025,220);}else sound(260,.05,'square',.016);break;}}
+    }
+    for(const d of drops){d.y+=d.vy*dt;d.phase+=dt*4;if(Math.hypot(d.x-player.x,d.y-player.y)<23){player.weapon=d.type;$('weapon-name').textContent=d.type===2?'DOUBLE SHOT':'TRIPLE SHOT';$('weapon-caption').textContent=d.type===2?'2발 동시 발사':'3발 동시 발사';$('weapon-visual').className='weapon-visual '+(d.type===2?'double':'triple');toast(d.type===2?'DOUBLE SHOT!':'TRIPLE SHOT!');burst(d.x,d.y,'#88f7f2',12);sound(550,.25,'sine',.05,700);d.got=true;}}
+    drops=drops.filter(d=>d.y<H+12&&!d.got);
+    for(const b of bombs){if(player.invuln<=0&&Math.hypot(b.x-player.x,b.y-player.y)<17){b.hit=true;damagePlayer();break;}}bombs=bombs.filter(b=>!b.hit);
+    for(const p of particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vx*=.97;p.vy*=.97;p.life-=dt;}particles=particles.filter(p=>p.life>0);
+    if(enemies.length&&enemies.every(e=>!e.alive)){if(stage>=5){finishGame(true);}else{stage++;uiStage();player.weapon=1;$('weapon-name').textContent='SINGLE SHOT';$('weapon-caption').textContent='기본 펄스 빔';$('weapon-visual').className='weapon-visual';makeWave();showStage();sound(660,.35,'triangle',.06,440);}}
+  }
+  function damagePlayer(){lives--;player.invuln=1.6;burst(player.x,player.y,'#79dff5',16);sound(190,.28,'sawtooth',.05,-100);$('lives').innerHTML=Array.from({length:3},(_,i)=>`<span style="opacity:${i<lives?1:.2}">♥</span>`).join('');if(lives<=0)finishGame(false);}
+  function finishGame(won){running=false;gameOver=true;$('overlay-kicker').textContent=won?'GALAXY SECURED · MISSION CLEAR':'SIGNAL LOST · GAME OVER';$('overlay-title').innerHTML=won?'은하<br /><span>수호!</span>':'다시<br /><span>도전!</span>';$('overlay-copy').innerHTML=won?`5단계 전 함대를 격파했어요!<br />최종 점수 ${String(score).padStart(6,'0')}`:`최종 점수 ${String(score).padStart(6,'0')}<br />다시 출격해 은하를 지켜주세요.`;$('start-label').textContent='다시 시작';$('start-button').querySelector('span:first-child').textContent='↻';$('overlay').classList.remove('hidden');}
+  function drawShip(x,y,scale=1,color='#9cebf1'){ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);ctx.shadowColor=color;ctx.shadowBlur=15;ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(0,-19);ctx.lineTo(7,-5);ctx.lineTo(18,7);ctx.lineTo(18,12);ctx.lineTo(6,8);ctx.lineTo(0,14);ctx.lineTo(-6,8);ctx.lineTo(-18,12);ctx.lineTo(-18,7);ctx.lineTo(-7,-5);ctx.closePath();ctx.fill();ctx.fillStyle='#fff4cc';ctx.beginPath();ctx.moveTo(0,-10);ctx.lineTo(3,1);ctx.lineTo(0,5);ctx.lineTo(-3,1);ctx.fill();ctx.restore();}
+  function drawEnemy(e,now){const col=e.row%3===0?'#ff7db6':e.row%3===1?'#ffd271':'#83e8a3';ctx.save();ctx.translate(e.x,e.y);ctx.rotate(Math.sin(now*.003+e.phase)*.05);ctx.shadowColor=col;ctx.shadowBlur=12;ctx.fillStyle=col;ctx.beginPath();ctx.ellipse(0,0,13,9,0,0,Math.PI*2);ctx.fill();ctx.fillRect(-17,-2,7,4);ctx.fillRect(10,-2,7,4);ctx.beginPath();ctx.moveTo(-10,5);ctx.lineTo(-15,12);ctx.lineTo(-4,9);ctx.moveTo(10,5);ctx.lineTo(15,12);ctx.lineTo(4,9);ctx.fill();ctx.fillStyle='#182033';ctx.fillRect(-6,-2,3,3);ctx.fillRect(3,-2,3,3);ctx.restore();}
+  function render(now){ctx.clearRect(0,0,W,H);const bg=ctx.createLinearGradient(0,0,0,H);bg.addColorStop(0,'#080d1d');bg.addColorStop(.65,'#0c1430');bg.addColorStop(1,'#0b1025');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);for(const s of stars){ctx.globalAlpha=s.a*(.7+.3*Math.sin(now*.001+s.x));ctx.fillStyle=s.hue?'#a6ecfa':'#d8e1ff';ctx.fillRect(s.x,s.y,s.r,s.r);}ctx.globalAlpha=1;
+    for(const e of enemies)if(e.alive)drawEnemy(e,now);
+    ctx.save();for(const b of bombs){ctx.shadowColor='#ff7197';ctx.shadowBlur=12;ctx.fillStyle='#ff8399';ctx.beginPath();ctx.arc(b.x,b.y,5,0,Math.PI*2);ctx.fill();ctx.fillStyle='#ffe5ac';ctx.beginPath();ctx.arc(b.x-1,b.y-1,1.5,0,Math.PI*2);ctx.fill();}ctx.restore();
+    ctx.save();for(const s of shots){ctx.shadowColor='#72f5ff';ctx.shadowBlur=12;ctx.fillStyle='#adfaff';ctx.fillRect(s.x-2,s.y-9,4,13);}ctx.restore();
+    for(const d of drops){ctx.save();ctx.translate(d.x,d.y);ctx.rotate(Math.sin(d.phase)*.12);ctx.shadowColor='#ffdc77';ctx.shadowBlur=18;ctx.fillStyle='#f8d078';ctx.beginPath();ctx.moveTo(0,-11);ctx.lineTo(10,0);ctx.lineTo(0,11);ctx.lineTo(-10,0);ctx.closePath();ctx.fill();ctx.fillStyle='#23213a';ctx.font='bold 9px monospace';ctx.textAlign='center';ctx.fillText(d.type===2?'2':'3',0,3);ctx.restore();}
+    for(const p of particles){ctx.globalAlpha=Math.max(0,p.life/p.max);ctx.fillStyle=p.color;ctx.fillRect(p.x,p.y,p.r,p.r);}ctx.globalAlpha=1;
+    if(player&&(!player.invuln||Math.floor(now/85)%2===0))drawShip(player.x,player.y);
+    ctx.strokeStyle='#a7b9f012';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,H-34);ctx.lineTo(W,H-34);ctx.stroke();
+  }
+  function loop(now){if(!running)return;const dt=Math.min((now-last)/1000,.04);last=now;update(dt,now);render(now);if(running)requestAnimationFrame(loop);}
+  function idle(){render(performance.now());requestAnimationFrame(idle);}uiStage();idle();
+})();
+
+</script>
+</body>
+</html>
+
